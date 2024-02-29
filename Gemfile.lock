@@ -51,6 +51,7 @@ GEM
       watir (>= 6.10.3)
     page_navigation (0.10)
       data_magic (>= 0.22)
+    rake (13.0.6)
     regexp_parser (2.9.0)
     rexml (3.2.6)
     rspec (3.13.0)
@@ -89,6 +90,7 @@ DEPENDENCIES
   faker
   httparty
   page-object
+  rake
   rspec
 
 BUNDLED WITH
