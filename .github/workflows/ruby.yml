@@ -26,4 +26,4 @@ jobs:
         ruby-version: '3.3'
         bundler-cache: true
     - name: Run with Ruby
-      run: ruby test.rb
+      run: bundle exec rake apiJsonPlaceholder
