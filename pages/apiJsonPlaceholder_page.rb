@@ -1,32 +1,27 @@
 require "httparty"
 
 module Api
-  class ApiJsonPlaceholder
-    include HTTParty
-    base_uri "https://jsonplaceholder.typicode.com"
-    # debug_output $stdout
+  include HTTParty
+  base_uri "https://jsonplaceholder.typicode.com"
+  # debug_output $stdout
+  def getUser(user)
+    get("/users?username=#{user}", format: :json)
+  end
 
-    def getUser(user)
-      self.class.get("/users?username=#{user}", format: :json)
-    end
+  def getUserPosts(userId)
+    userPosts = get("/posts?userId=#{userId}", format: :json)
+    #   puts userPosts.size
+  end
 
-    def getUserPosts(userId)
-      userPosts = self.class.get("/posts?userId=#{userId}", format: :json)
-      #   puts userPosts.size
-      #   return userPosts
-    end
-
-    def GetUserPostsCommentsEmails(allPosts)
-      validate = Api::Validators.new
-      allPosts.each do |eachPost|
-        postsComments = self.class.get("/comments?postId=#{eachPost["id"]}", format: :json)
-        postsComments.each do |eachComment|
-          # puts eachComment["email"]
-          # expect(validate.email(eachComment["email"])).to be true
-          status = validate.email(eachComment["email"])
-          if status != true
-            puts "The Email: #{eachComment["email"]} From comment ID No. #{eachComment["id"]} is not a valid Email..."
-          end
+  def GetUserPostsCommentsEmails(allPosts)
+    validate = Api::Validators.new
+    allPosts.each do |eachPost|
+      postsComments = get("/comments?postId=#{eachPost["id"]}", format: :json)
+      postsComments.each do |eachComment|
+        # puts eachComment["email"]
+        status = validate.email(eachComment["email"])
+        if status != true
+          puts "The Email: #{eachComment["email"]} From comment ID No. #{eachComment["id"]} is not a valid Email..."
         end
       end
     end
@@ -44,6 +39,3 @@ module Api
     end
   end
 end
-
-# response = Api.getUser("Delphine")
-# puts response.body
