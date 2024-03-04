@@ -14,7 +14,7 @@ module Api
   end
 
   def GetUserPostsCommentsEmails(allPosts)
-    validate = Api::Validators.new
+    validate = Validators.new
     allPosts.each do |eachPost|
       postsComments = get("/comments?postId=#{eachPost["id"]}", format: :json)
       postsComments.each do |eachComment|
@@ -26,16 +26,16 @@ module Api
       end
     end
   end
+end
 
-  class Validators
-    def email(email)
-      #   puts email
-      email_regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
-      if email.match?(email_regex)
-        return true
-      else
-        return false
-      end
+class Validators
+  def email(email)
+    #   puts email
+    email_regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
+    if email.match?(email_regex)
+      return true
+    else
+      return false
     end
   end
 end
