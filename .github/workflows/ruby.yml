@@ -27,3 +27,5 @@ jobs:
         bundler-cache: true
     - name: Run with Ruby
       run: bundle exec rake apiJsonPlaceholder
+
+      

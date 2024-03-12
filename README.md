@@ -39,3 +39,7 @@ or simply
 ```
 cucumber
 ```
+
+
+## Report Page:
+After the test job finishes, a report page will be available ate the address below:
